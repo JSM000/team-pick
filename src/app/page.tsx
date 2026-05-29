@@ -86,7 +86,7 @@ export default function Home() {
   };
 
   // ── 플레이 액션 ──────────────────────────────────────────────
-  const handleTouch = (e: React.TouchEvent | React.MouseEvent) => {
+  const handleTouch = (e: React.PointerEvent) => {
     e.preventDefault();
     if (phase === 'waiting') {
       setPhase('reveal');
@@ -238,8 +238,8 @@ export default function Home() {
     return (
       <div
         className="fixed inset-0 bg-zinc-950 flex flex-col items-center justify-center cursor-pointer select-none"
-        onTouchStart={handleTouch}
-        onClick={handleTouch}
+        style={{ touchAction: 'none' }}
+        onPointerDown={handleTouch}
       >
         <p className="text-[96px] font-extrabold text-white leading-none mb-6 select-none">
           터치
@@ -273,10 +273,9 @@ export default function Home() {
     const textColor = getTextColor(bg);
     return (
       <div
-        className="fixed inset-0 flex flex-col items-center justify-center cursor-pointer select-none transition-colors duration-150"
-        style={{ backgroundColor: bg }}
-        onTouchStart={handleTouch}
-        onClick={handleTouch}
+        className="fixed inset-0 flex flex-col items-center justify-center cursor-pointer select-none"
+        style={{ backgroundColor: bg, touchAction: 'none' }}
+        onPointerDown={handleTouch}
       >
         <p
           className="text-[120px] font-extrabold leading-none mb-4 select-none"
